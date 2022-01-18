@@ -5,6 +5,8 @@
 package com.geek45.esdemo.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.geek45.esdemo.commons.EsUtils;
+import com.geek45.esdemo.commons.model.EsSearchModel;
 import com.geek45.esdemo.config.EsClient;
 import com.geek45.esdemo.config.TestEsProperties;
 import com.geek45.esdemo.service.EsService;
@@ -49,6 +51,14 @@ public class EsServiceImpl implements EsService {
     }
 
     @Override
+    public void search(EsSearchModel model) throws IOException {
+        SearchRequest request = EsUtils.generatorRequest(testEsProperties.getIndex(), model);
+        logger.info("request is : {}", JSON.toJSONString(request));
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        logger.info("response is :{}", JSON.toJSONString(response));
+    }
+
+    @Override
     public void search(String query) throws IOException {
         SearchRequest request = new SearchRequest(testEsProperties.getIndex());
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
@@ -59,7 +69,7 @@ public class EsServiceImpl implements EsService {
         sourceBuilder.query(whereBuilder);
 
         request.source(sourceBuilder);
-
+        logger.info("request is : {}", JSON.toJSONString(request));
         SearchResponse response = client.search(request, RequestOptions.DEFAULT);
         logger.info("response is :{}", JSON.toJSONString(response));
     }

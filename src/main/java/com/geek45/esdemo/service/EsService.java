@@ -4,6 +4,8 @@
  */
 package com.geek45.esdemo.service;
 
+import com.geek45.esdemo.commons.model.EsSearchModel;
+
 import java.io.IOException;
 
 /**
@@ -19,6 +21,13 @@ public interface EsService {
      * @param query
      */
     void search(String query) throws IOException;
+
+
+    /**
+     * 条件查询
+     * @param model
+     */
+    void search(EsSearchModel model) throws IOException;
 
     /**
      * 新增
