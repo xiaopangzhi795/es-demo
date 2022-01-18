@@ -5,6 +5,9 @@
 package com.geek45.esdemo.commons.model;
 
 import com.geek45.esdemo.commons.enums.SortType;
+import com.geek45.esdemo.commons.model.dto.FieldSearchDTO;
+import com.geek45.esdemo.commons.model.dto.SortFieldDTO;
+import com.geek45.esdemo.commons.model.dto.TimeSearchDTO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 

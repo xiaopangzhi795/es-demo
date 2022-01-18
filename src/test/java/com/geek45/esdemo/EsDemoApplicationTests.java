@@ -3,7 +3,7 @@ package com.geek45.esdemo;
 import com.alibaba.fastjson.JSONObject;
 import com.geek45.esdemo.commons.enums.OperatorEnum;
 import com.geek45.esdemo.commons.model.EsSearchModel;
-import com.geek45.esdemo.commons.model.FieldSearchDTO;
+import com.geek45.esdemo.commons.model.dto.FieldSearchDTO;
 import com.geek45.esdemo.commons.strategy.StrategyFactory;
 import com.geek45.esdemo.service.EsService;
 import org.junit.Test;

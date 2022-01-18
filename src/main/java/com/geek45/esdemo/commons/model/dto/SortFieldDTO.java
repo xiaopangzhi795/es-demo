@@ -2,7 +2,7 @@
  * From geek45.com
  * Email to : rubixgeek795@gmail.com
  */
-package com.geek45.esdemo.commons.model;
+package com.geek45.esdemo.commons.model.dto;
 
 import com.geek45.esdemo.commons.enums.SortType;
 

@@ -5,7 +5,7 @@
 package com.geek45.esdemo.commons.strategy.impl;
 
 import com.geek45.esdemo.commons.enums.OperatorEnum;
-import com.geek45.esdemo.commons.model.FieldSearchDTO;
+import com.geek45.esdemo.commons.model.dto.FieldSearchDTO;
 import com.geek45.esdemo.commons.strategy.OperatorStrategy;
 import org.elasticsearch.common.util.set.Sets;
 import org.elasticsearch.index.query.BoolQueryBuilder;
