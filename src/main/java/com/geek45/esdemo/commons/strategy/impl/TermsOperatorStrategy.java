@@ -5,6 +5,7 @@
 package com.geek45.esdemo.commons.strategy.impl;
 
 import com.geek45.esdemo.commons.enums.OperatorEnum;
+import com.geek45.esdemo.commons.enums.SearchType;
 import com.geek45.esdemo.commons.model.dto.FieldSearchDTO;
 import com.geek45.esdemo.commons.strategy.OperatorStrategy;
 import org.elasticsearch.common.util.set.Sets;
@@ -22,28 +23,29 @@ import java.util.Set;
  */
 @Component
 public class TermsOperatorStrategy implements OperatorStrategy {
+
+    @Override
+    public SearchType matchSearchType() {
+        return SearchType.TERMS;
+    }
+
     @Override
     public Set<OperatorEnum> supportMatchScene() {
         return Sets.newHashSet(OperatorEnum.EQ, OperatorEnum.NEQ);
     }
 
     @Override
-    public void processingFieldBuilderOfMust(BoolQueryBuilder builder, FieldSearchDTO fieldSearchDTO) {
+    public void processingFieldBuilder(BoolQueryBuilder builder, FieldSearchDTO fieldSearchDTO) {
         OperatorEnum operatorEnum = getOperatorEnum(fieldSearchDTO.getOperator());
-        if (operatorEnum != OperatorEnum.EQ) {
-            return;
-        }
         TermsQueryBuilder termsQuery = termsQuery(fieldSearchDTO);
-        builder.must(termsQuery);
+
+        if (operatorEnum == OperatorEnum.EQ) {
+            builder.must(termsQuery);
+        }
+
+        if (operatorEnum == OperatorEnum.NEQ) {
+            builder.mustNot(termsQuery);
+        }
     }
 
-    @Override
-    public void processingFieldBuilderOfMustNot(BoolQueryBuilder builder, FieldSearchDTO fieldSearchDTO) {
-        OperatorEnum operatorEnum = getOperatorEnum(fieldSearchDTO.getOperator());
-        if (operatorEnum != OperatorEnum.NEQ) {
-            return;
-        }
-        TermsQueryBuilder termsQuery = termsQuery(fieldSearchDTO);
-        builder.mustNot(termsQuery);
-    }
 }

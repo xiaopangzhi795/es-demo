@@ -5,13 +5,18 @@
 package com.geek45.esdemo.commons.strategy;
 
 import com.geek45.esdemo.commons.enums.OperatorEnum;
+import com.geek45.esdemo.commons.enums.SearchType;
 import com.geek45.esdemo.commons.model.dto.FieldSearchDTO;
+import com.geek45.esdemo.commons.model.dto.TimeSearchDTO;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.index.query.TermsQueryBuilder;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 /**
  * @ClassName: OperatorStrategy
@@ -21,31 +26,41 @@ import java.util.Set;
  */
 public interface OperatorStrategy {
 
-    Set<OperatorEnum> supportMatchScene();
+    /**
+     * 操作符类型
+     * @return
+     */
+    default Set<OperatorEnum> supportMatchScene(){
+        return Collections.emptySet();
+    }
+
+    /**
+     * 查询类型
+     * @return
+     */
+    SearchType matchSearchType();
 
     /**
      * 构建字段
      * @param builder
      * @param fieldSearchDTO
      */
-    default void processingFieldBuilderOfMust(BoolQueryBuilder builder, FieldSearchDTO fieldSearchDTO) {}
+    default void processingFieldBuilder(BoolQueryBuilder builder, FieldSearchDTO fieldSearchDTO) {}
 
     /**
      * 构建字段
+     *
      * @param builder
      * @param fieldSearchDTO
+     * @param isBuild 是否构建特殊话字段
      */
-    default void processingFieldBuilderOfMustNot(BoolQueryBuilder builder, FieldSearchDTO fieldSearchDTO) {}
+    default void processingFieldBuilderForList(BoolQueryBuilder builder, List<FieldSearchDTO> fieldSearchDTO, Boolean isBuild) {}
 
     /**
      * 构建时间
      */
-    default void processingTimeBuilder(){}
+    default void processingTimeBuilder(BoolQueryBuilder builder, List<TimeSearchDTO> timeSearch, Function<String, String> buildName) {}
 
-    /**
-     * 构建排序
-     */
-    default void processingSortBuilder(){}
 
     /**
      * 查询

@@ -5,6 +5,7 @@
 package com.geek45.esdemo.commons.strategy;
 
 import com.geek45.esdemo.commons.enums.OperatorEnum;
+import com.geek45.esdemo.commons.enums.SearchType;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,21 @@ public class StrategyFactory {
     private final static StrategyFactory INSTANCE = new StrategyFactory();
 
     private List<OperatorStrategy> operatorStrategyList;
+
+    /**
+     * 通过查询类型获取实现类
+     * @param searchType
+     * @return
+     */
+    public static OperatorStrategy getOperatorStrategyBySearchType(SearchType searchType) {
+        List<OperatorStrategy> list = INSTANCE.getOperatorStrategyList();
+        if (CollectionUtils.isEmpty(list)) {
+            throw new RuntimeException("没有找到该实现");
+        }
+        return list.stream().filter(x -> x.matchSearchType() == searchType).findAny().orElseGet(() -> {
+            throw new RuntimeException("没有找到该实现");
+        });
+    }
 
     /**
      * 通过操作符获取实现类

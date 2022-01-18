@@ -5,6 +5,7 @@
 package com.geek45.esdemo.commons.strategy.impl;
 
 import com.geek45.esdemo.commons.enums.OperatorEnum;
+import com.geek45.esdemo.commons.enums.SearchType;
 import com.geek45.esdemo.commons.model.dto.FieldSearchDTO;
 import com.geek45.esdemo.commons.strategy.OperatorStrategy;
 import org.elasticsearch.common.util.set.Sets;
@@ -22,26 +23,28 @@ import java.util.Set;
  */
 @Component
 public class ExistsOperatorStrategy implements OperatorStrategy {
+
+    @Override
+    public SearchType matchSearchType() {
+        return SearchType.EXISTS;
+    }
+
     @Override
     public Set<OperatorEnum> supportMatchScene() {
         return Sets.newHashSet(OperatorEnum.EXISTS, OperatorEnum.NOT_EXISTS);
     }
 
     @Override
-    public void processingFieldBuilderOfMust(BoolQueryBuilder builder, FieldSearchDTO fieldSearchDTO) {
+    public void processingFieldBuilder(BoolQueryBuilder builder, FieldSearchDTO fieldSearchDTO) {
         OperatorEnum operatorEnum = getOperatorEnum(fieldSearchDTO.getOperator());
-        if (operatorEnum != OperatorEnum.EXISTS) {
-            return;
+        if (operatorEnum == OperatorEnum.EXISTS) {
+            builder.must(QueryBuilders.existsQuery(fieldSearchDTO.getField()));
         }
-        builder.must(QueryBuilders.existsQuery(fieldSearchDTO.getField()));
+
+        if (operatorEnum == OperatorEnum.NOT_EXISTS) {
+            builder.mustNot(QueryBuilders.existsQuery(fieldSearchDTO.getField()));
+        }
+
     }
 
-    @Override
-    public void processingFieldBuilderOfMustNot(BoolQueryBuilder builder, FieldSearchDTO fieldSearchDTO) {
-        OperatorEnum operatorEnum = getOperatorEnum(fieldSearchDTO.getOperator());
-        if (operatorEnum != OperatorEnum.NOT_EXISTS) {
-            return;
-        }
-        builder.mustNot(QueryBuilders.existsQuery(fieldSearchDTO.getField()));
-    }
 }
