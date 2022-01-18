@@ -10,7 +10,6 @@ import com.geek45.esdemo.commons.strategy.OperatorStrategy;
 import org.elasticsearch.common.util.set.Sets;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;

@@ -12,7 +12,6 @@ import com.geek45.esdemo.commons.model.TimeSearchDTO;
 import com.geek45.esdemo.commons.strategy.OperatorStrategy;
 import com.geek45.esdemo.commons.strategy.StrategyFactory;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.common.unit.Fuzziness;

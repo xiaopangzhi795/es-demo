@@ -12,7 +12,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.elasticsearch.common.util.set.Sets;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
