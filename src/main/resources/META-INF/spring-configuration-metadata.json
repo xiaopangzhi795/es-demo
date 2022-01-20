@@ -1,0 +1,15 @@
+{
+  "properties": [
+    {
+      "name": "es.config.index",
+      "type": "java.lang.String",
+      "description": "the es index config .",
+      "defaultValue": "es_demo_test"
+    },{
+      "name": "es.config.type",
+      "type": "java.lang.String",
+      "description": "the es type config .",
+      "defaultValue": ""
+    }
+  ]
+}

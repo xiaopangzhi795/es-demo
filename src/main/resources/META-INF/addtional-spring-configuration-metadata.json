@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "es.config.index",
+      "type": "com.geek45.esdemo.config.TestEsProperties",
+      "description": "the es index config .",
+      "defaultValue": "es_demo_test"
+    },{
+      "name": "es.config.type",
+      "type": "com.geek45.esdemo.config.TestEsProperties",
+      "defaultValue": ""
+    }
+  ]
+}

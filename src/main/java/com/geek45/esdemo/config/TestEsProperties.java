@@ -5,7 +5,6 @@
 package com.geek45.esdemo.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 /**
  * @ClassName: TestEsConfig
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @Author: rubik
  * rubik create TestEsConfig.java of 2022/1/17 3:38 下午
  */
-@Component
 @ConfigurationProperties("es.config")
 public class TestEsProperties {
     private String type;
